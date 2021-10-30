@@ -11,7 +11,7 @@ public class GameCardType {
     String name;
     String description;
     
-    public GameCardType(int pa, int pb, int pca, int pco, int p, int c, boolean isA, String n, String d) {
+    private GameCardType(int pa, int pb, int pca, int pco, int p, int c, boolean isA, String n, String d) {
         plusActions = pa;
         plusBuys = pb;
         plusCards = pca;
@@ -28,7 +28,7 @@ public class GameCardType {
     public int getPlusCards() {return plusCards;}
     public int getPlusCoins() {return plusCoins;}
     public int getPoints() {return points;}
-    public int isAction() {return isAction();}
+    public boolean isAction() {return isAction;}
     public String getName() {return name;}
     public String getDescription() {return description;}
     
