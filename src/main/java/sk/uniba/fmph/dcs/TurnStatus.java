@@ -5,6 +5,12 @@ public class TurnStatus {
     public int buys;
     public int coins;
 
+    TurnStatus(){
+        actions = 1;
+        buys = 1;
+        coins = 0;
+    }
+
     @Override
     public int hashCode() {
         final int prime = 31;
