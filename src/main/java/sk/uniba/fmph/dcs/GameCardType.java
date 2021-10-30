@@ -31,6 +31,13 @@ public class GameCardType {
     public boolean isAction() {return isAction;}
     public String getName() {return name;}
     public String getDescription() {return description;}
+
+    public boolean isTreasure(){
+        return (this.isAction()&&(this.getPlusCoins()>0));
+    }
+    public boolean isVictory(){
+        return (this.isAction()&&(this.getPoints()>0));
+    }
     
     public static final GameCardType GAME_CARD_TYPE_MARKET = new GameCardType(1, 1, 1, 1, 0, 5, true, "Market", "+1 Action; +1 Buy; +1 Card; +1 Coin");
     public static final GameCardType GAME_CARD_TYPE_ESTATE = new GameCardType(0, 0, 0, 0, 1, 2, false, "Estate", "+1 Point");

@@ -13,9 +13,9 @@ public class GameCard implements CardInterface{
         if(type.isAction){ //usage of non-action cards (treasures, victory cards aren't played) should not cost actions
             ts.actions--;
         }
-        ts.actions += type.plusActions;
-        ts.buys += type.plusBuys;
-        ts.coins += type.plusCoins;
+        ts.actions += type.getPlusActions();
+        ts.buys += type.getPlusBuys();
+        ts.coins += type.getPlusCoins();
         // plus cards will be drawn just after evaluation at place where it is evaluated
         // cost will be taken into consideration while buy phase, points will be counted somewhere else too
     }

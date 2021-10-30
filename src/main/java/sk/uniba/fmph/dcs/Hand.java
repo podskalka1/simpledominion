@@ -18,7 +18,7 @@ public class Hand {
     }
 
     public CardInterface play(int idx){
-        if(idx>0 && idx< cards.size()) return cards.get(idx);
+        if(idx>0 && idx< cards.size()) return cards.remove(idx);
         else return null;
     }
 
