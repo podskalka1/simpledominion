@@ -9,12 +9,6 @@ public class Deck {
     DiscardPile discard; //reference to discard pile
 
     public Deck(DiscardPile discard){
-        for(int i = 0;i<3;i++){
-            cards.add(new GameCard(GameCardType.GAME_CARD_TYPE_ESTATE));
-        }
-        for(int i = 0;i<7;i++){
-            cards.add(new GameCard(GameCardType.GAME_CARD_TYPE_COPPER));
-        }
         this.discard = discard;
     }
 
