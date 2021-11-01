@@ -12,10 +12,15 @@ public class BuyDeck {
     }
 
     public CardInterface buy(){
-        if (cardCount>0){
-            cardCount--;
-            return new GameCard(type);
-        }
-        else return null;
+        cardCount--;
+        return new GameCard(type);
+    }
+
+    public boolean isEmpty(){
+        return cardCount==0;
+    }
+
+    public int getCost(){
+        return type.getCost();
     }
 }

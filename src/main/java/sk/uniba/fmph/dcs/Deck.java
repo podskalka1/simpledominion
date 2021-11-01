@@ -5,8 +5,8 @@ import java.util.List;
 
 public class Deck {
 
-    ArrayList<CardInterface> cards = new ArrayList<>();
-    DiscardPile discard; //reference to discard pile
+    private ArrayList<CardInterface> cards = new ArrayList<>();
+    private final DiscardPile discard; //reference to discard pile
 
     public Deck(DiscardPile discard){
         this.discard = discard;

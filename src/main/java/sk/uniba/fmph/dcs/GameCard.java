@@ -10,7 +10,7 @@ public class GameCard implements CardInterface{
 
     @Override
     public void evaluate(TurnStatus ts) {
-        if(type.isAction){ //usage of non-action cards (treasures, victory cards aren't played) should not cost actions
+        if(type.isAction()){ //usage of non-action cards (treasures, victory cards aren't played) should not cost actions
             ts.actions--;
         }
         ts.actions += type.getPlusActions();

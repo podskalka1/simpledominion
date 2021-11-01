@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Play {
-    public ArrayList<CardInterface> cards = new ArrayList<>();
+    private ArrayList<CardInterface> cards = new ArrayList<>();
 
     public void putTo(CardInterface card){
         cards.add(card);

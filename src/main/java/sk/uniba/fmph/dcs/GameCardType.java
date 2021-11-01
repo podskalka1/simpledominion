@@ -1,15 +1,15 @@
 package sk.uniba.fmph.dcs;
 
 public class GameCardType {
-    int plusActions;
-    int plusBuys;
-    int plusCards;
-    int plusCoins;
-    int points;
-    int cost;
-    boolean isAction;
-    String name;
-    String description;
+    private int plusActions;
+    private int plusBuys;
+    private int plusCards;
+    private int plusCoins;
+    private int points;
+    private int cost;
+    private boolean isAction;
+    private String name;
+    private String description;
     
     private GameCardType(int pa, int pb, int pca, int pco, int p, int c, boolean isA, String n, String d) {
         plusActions = pa;
@@ -32,6 +32,7 @@ public class GameCardType {
     public String getName() {return name;}
     public String getDescription() {return description;}
 
+    public int getCost(){return cost;}
     public boolean isTreasure(){
         return (this.isAction()&&(this.getPlusCoins()>0));
     }

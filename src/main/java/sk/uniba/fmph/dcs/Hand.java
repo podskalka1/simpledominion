@@ -1,11 +1,12 @@
 package sk.uniba.fmph.dcs;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Hand {
-    public ArrayList<CardInterface> cards;
+    private ArrayList<CardInterface> cards;
 
-    Deck deck;
+    private final Deck deck;
 
     public Hand(Deck deck){
         this.deck = deck;
@@ -20,6 +21,12 @@ public class Hand {
     public CardInterface play(int idx){
         if(idx>0 && idx< cards.size()) return cards.remove(idx);
         else return null;
+    }
+
+    public List<CardInterface> throwAll(){
+        List<CardInterface> cardsToSend = cards;
+        cards = new ArrayList<>();
+        return cardsToSend;
     }
 
     public void draw(int count){
