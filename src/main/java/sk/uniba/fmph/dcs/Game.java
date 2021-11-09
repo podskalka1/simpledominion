@@ -2,6 +2,7 @@ package sk.uniba.fmph.dcs;
 
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.Optional;
 
 public class Game {
     TurnStatus turnStatus;
@@ -18,11 +19,19 @@ public class Game {
     public boolean playCard(int handIdx){
         if(endGameStrategy.isGameOver()) return false;
         if(turn.hand.isActionCard(handIdx)&& !(turnStatus.actions >0))return false;
-        CardInterface playedCard = turn.hand.play(handIdx);
-        playedCard.evaluate(turnStatus);
-        turn.hand.draw(playedCard.cardType().getPlusCards());
+        Optional<CardInterface> playedCard = turn.hand.play(handIdx);
+        if(playedCard.isPresent()){
+            System.out.println("played "+playedCard.get().cardType().getName());
+            playedCard.get().evaluate(turnStatus);
+            System.out.println("coins "+turnStatus.coins+"; actions "+turnStatus.actions+"; buys "+turnStatus.buys);
+            turn.hand.draw(playedCard.get().cardType().getPlusCards());
+            System.out.println("cards "+playedCard.get().cardType().getPlusCards());
+            turn.play.putTo(playedCard.get());
+            return true;
+        }
 
-        return true;
+
+        return false;
     }
 
     public boolean endPlayCardPhase(){
@@ -38,12 +47,14 @@ public class Game {
         if(endGameStrategy.isGameOver())return false;
         if(turn.buyDecks.size()-1<buyCardIdx) return false;
         if(turn.buyDecks.get(buyCardIdx).getCost()>turnStatus.coins) return false;
-        else{
+        if(turn.buyDecks.get(buyCardIdx).isEmpty()) return false;
+        Optional<CardInterface> newCard = turn.buyDecks.get(buyCardIdx).buy();
+        if(newCard.isPresent()){
             turnStatus.coins=-turn.buyDecks.get(buyCardIdx).getCost();
             turnStatus.buys--;
-            turn.discardPile.addCards(Collections.singletonList(turn.buyDecks.get(buyCardIdx).buy()));
+            turn.discardPile.addCards(Collections.singletonList(newCard.get()));
             return true;
-        }
+        }else return false;
     }
 
     public boolean endTurn(){

@@ -15,10 +15,10 @@ public class Deck {
     List<CardInterface> draw(int count){
         ArrayList<CardInterface> retrn = new ArrayList<>();
         for(int i = 0;i<count;i++){
-            retrn.add(cards.remove(cards.size()-1));
             if(cards.size()==0){
                 cards = new ArrayList<>(discard.shuffle());
             }
+            retrn.add(cards.remove(cards.size()-1));
         }
         return retrn;
     }

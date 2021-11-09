@@ -25,6 +25,7 @@ public class Turn {
 
         deck = new Deck(discardPile);
         hand = new Hand(deck);
+        play = new Play();
         buyDecks = new ArrayList<>(Arrays.asList(
             new BuyDeck(10,GameCardType.GAME_CARD_TYPE_MARKET),
             new BuyDeck(12,GameCardType.GAME_CARD_TYPE_ESTATE),

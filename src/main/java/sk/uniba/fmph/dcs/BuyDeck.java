@@ -1,6 +1,7 @@
 package sk.uniba.fmph.dcs;
 
 import java.util.List;
+import java.util.Optional;
 
 public class BuyDeck {
     private int cardCount;
@@ -11,13 +12,13 @@ public class BuyDeck {
         this.type = type;
     }
 
-    public CardInterface buy(){
+    public Optional<CardInterface> buy(){
         cardCount--;
-        return new GameCard(type);
+        return Optional.of(new GameCard(type));
     }
 
     public boolean isEmpty(){
-        return cardCount==0;
+        return cardCount<1;
     }
 
     public int getCost(){
