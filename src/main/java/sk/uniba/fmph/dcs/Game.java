@@ -18,6 +18,7 @@ public class Game {
 
     public boolean playCard(int handIdx){
         if(endGameStrategy.isGameOver()) return false;
+        if(!playCardPhase)return false; //you aren't supposed to play in buy phase
         if(turn.getHand().isActionCard(handIdx)&& !(turnStatus.actions >0))return false;
         Optional<CardInterface> playedCard = turn.getHand().play(handIdx);
         if(playedCard.isPresent()){
@@ -39,6 +40,7 @@ public class Game {
 
     public boolean buyCard(int buyCardIdx){
         if(endGameStrategy.isGameOver())return false;
+        if(playCardPhase)return false; //you aren't supposed to buy in play phase
         if(turn.getBuyDecks().size()-1<buyCardIdx) return false;
         if(turn.getBuyDeck(buyCardIdx).getCost()>turnStatus.coins) return false;
         if(turn.getBuyDeck(buyCardIdx).isEmpty()) return false;
