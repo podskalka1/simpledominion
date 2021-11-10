@@ -21,16 +21,10 @@ public class Game {
         if(turn.hand.isActionCard(handIdx)&& !(turnStatus.actions >0))return false;
         Optional<CardInterface> playedCard = turn.hand.play(handIdx);
         if(playedCard.isPresent()){
-            System.out.println("played "+playedCard.get().cardType().getName());
-            playedCard.get().evaluate(turnStatus);
-            System.out.println("coins "+turnStatus.coins+"; actions "+turnStatus.actions+"; buys "+turnStatus.buys);
-            turn.hand.draw(playedCard.get().cardType().getPlusCards());
-            System.out.println("cards "+playedCard.get().cardType().getPlusCards());
+            turn.hand.draw(playedCard.get().evaluate(turnStatus));
             turn.play.putTo(playedCard.get());
             return true;
         }
-
-
         return false;
     }
 

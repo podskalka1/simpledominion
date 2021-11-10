@@ -1,5 +1,6 @@
 package sk.uniba.fmph.dcs;
 
+
 public class GameCard implements CardInterface{
 
     private final GameCardType type;
@@ -9,15 +10,14 @@ public class GameCard implements CardInterface{
     }
 
     @Override
-    public void evaluate(TurnStatus ts) {
+    public int evaluate(TurnStatus ts) {
         if(type.isAction()){ //usage of non-action cards (treasures, victory cards aren't played) should not cost actions
             ts.actions--;
         }
         ts.actions += type.getPlusActions();
         ts.buys += type.getPlusBuys();
         ts.coins += type.getPlusCoins();
-        // plus cards will be drawn just after evaluation at place where it is evaluated
-        // cost will be taken into consideration while buy phase, points will be counted somewhere else too
+        return type.getPlusCards();
     }
 
     @Override
