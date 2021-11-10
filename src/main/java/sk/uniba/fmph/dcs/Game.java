@@ -13,16 +13,16 @@ public class Game {
     public Game(){
         turnStatus = new TurnStatus();
         turn = new Turn(turnStatus);
-        endGameStrategy = new AtLeastNEmptyDecks(turn.buyDecks);
+        endGameStrategy = new AtLeastNEmptyDecks(turn.getBuyDecks());
     }
 
     public boolean playCard(int handIdx){
         if(endGameStrategy.isGameOver()) return false;
-        if(turn.hand.isActionCard(handIdx)&& !(turnStatus.actions >0))return false;
-        Optional<CardInterface> playedCard = turn.hand.play(handIdx);
+        if(turn.getHand().isActionCard(handIdx)&& !(turnStatus.actions >0))return false;
+        Optional<CardInterface> playedCard = turn.getHand().play(handIdx);
         if(playedCard.isPresent()){
-            turn.hand.draw(playedCard.get().evaluate(turnStatus));
-            turn.play.putTo(playedCard.get());
+            turn.getHand().draw(playedCard.get().evaluate(turnStatus));
+            turn.getPlay().putTo(playedCard.get());
             return true;
         }
         return false;
@@ -39,14 +39,14 @@ public class Game {
 
     public boolean buyCard(int buyCardIdx){
         if(endGameStrategy.isGameOver())return false;
-        if(turn.buyDecks.size()-1<buyCardIdx) return false;
-        if(turn.buyDecks.get(buyCardIdx).getCost()>turnStatus.coins) return false;
-        if(turn.buyDecks.get(buyCardIdx).isEmpty()) return false;
-        Optional<CardInterface> newCard = turn.buyDecks.get(buyCardIdx).buy();
+        if(turn.getBuyDecks().size()-1<buyCardIdx) return false;
+        if(turn.getBuyDeck(buyCardIdx).getCost()>turnStatus.coins) return false;
+        if(turn.getBuyDeck(buyCardIdx).isEmpty()) return false;
+        Optional<CardInterface> newCard = turn.getBuyDeck(buyCardIdx).buy();
         if(newCard.isPresent()){
-            turnStatus.coins=-turn.buyDecks.get(buyCardIdx).getCost();
+            turnStatus.coins=-turn.getBuyDeck(buyCardIdx).getCost();
             turnStatus.buys--;
-            turn.discardPile.addCards(Collections.singletonList(newCard.get()));
+            turn.getDiscardPile().addCards(Collections.singletonList(newCard.get()));
             return true;
         }else return false;
     }
@@ -55,9 +55,9 @@ public class Game {
         if(endGameStrategy.isGameOver()) return false;
         if(!playCardPhase){
             playCardPhase=true;
-                turn.discardPile.addCards(turn.hand.throwAll());
-                turn.discardPile.addCards(turn.play.throwAll());
-                turn.hand.draw(5);
+                turn.getDiscardPile().addCards(turn.getHand().throwAll());
+                turn.getDiscardPile().addCards(turn.getPlay().throwAll());
+                turn.getHand().draw(5);
                 turnStatus = new TurnStatus();
                 turn.setTurnStatus(turnStatus);
             return true;

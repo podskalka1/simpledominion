@@ -5,11 +5,11 @@ import java.util.Arrays;
 
 public class Turn {
     TurnStatus turnStatus;
-    DiscardPile discardPile;
-    Deck deck;
-    Hand hand;
-    Play play;
-    ArrayList<BuyDeck> buyDecks;
+    private DiscardPile discardPile;
+    private final Deck deck;
+    private final Hand hand;
+    private final Play play;
+    private final ArrayList<BuyDeck> buyDecks;
 
 
     public Turn(TurnStatus turnStatus){
@@ -35,9 +35,30 @@ public class Turn {
             new BuyDeck(10,GameCardType.GAME_CARD_TYPE_FESTIVAL),
             new BuyDeck(10,GameCardType.GAME_CARD_TYPE_LABORATORY)
         ));
+    }
 
+    public Deck getDeck() {
+        return deck;
+    }
 
+    public Hand getHand() {
+        return hand;
+    }
 
+    public Play getPlay() {
+        return play;
+    }
+
+    public ArrayList<BuyDeck> getBuyDecks() {
+        return buyDecks;
+    }
+
+    public BuyDeck getBuyDeck(int i) {
+        return buyDecks.get(i);
+    }
+
+    public DiscardPile getDiscardPile() {
+        return discardPile;
     }
 
     public void setTurnStatus(TurnStatus turnStatus) {
